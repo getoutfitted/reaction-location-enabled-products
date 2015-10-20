@@ -1,0 +1,64 @@
+<template name="locationEnabledProductsSettings">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title"></div>
+      <a href="https://developers.google.com/maps/documentation/geocoding/get-api-key#key" target="_blank">Get a Google Maps Geocoding API key.</a> (Get a 'Server Key' - Need to sign in and enable the Geocoding API)
+      <a href="https://www.mapbox.com/developers/api/" target="_blank">Get a Mapbox API key.</a> (Need to sign in)
+    </div>
+    <div class="panel-body">
+      {{#autoForm collection="ReactionCore.Collections.Packages" schema="ReactionCore.Schemas.LocationEnabledProductsPackageConfig" doc=packageData type="update" id="location-enabled-products-update-form"}}
+        {{>afQuickField name='settings.google_maps_api_key'}}
+        {{>afQuickField name='settings.mapbox_api_key'}}
+        <button type="submit" class="btn btn-primary pull-right">Update</button>
+      {{/autoForm}}
+    </div>
+  </div>
+
+</template>
+
+
+<template name="locationEnabledProducts">
+  <div class="container-fluid-sm flex">
+    <div class="flex-item">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Location Enabled Products</div>
+        </div>
+        <div class="list-group">
+          <div class="list-group-item">
+            {{#if packageData.settings.google_maps_api_key}}
+              <span>Google API Key: <button type="button" class="btn btn-link" data-event-action="showPackageSettings">**********</button></span><br />
+            {{else}}
+              <span>Google API Key: <button type="button" class="btn btn-link" data-event-action="showPackageSettings">Configure Now</button></span><br />
+            {{/if}}
+            {{#if packageData.settings.mapbox_api_key}}
+              <span>Mapbox API Key: <button type="button" class="btn btn-link" data-event-action="showPackageSettings">**********</button></span>
+            {{else}}
+              <span>Mapbox API Key: <button type="button" class="btn btn-link" data-event-action="showPackageSettings">Configure Now</button></span>
+            {{/if}}
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="left"></div>
+          <div class="right">
+            
+            <div class="panel-footer-item">
+              {{#if packageData.settings.api_key}}
+                <i class="fa fa-check-circle fa-2x text-success"></i>
+              {{else}}
+                <i class="fa fa-minus-circle fa-2x text-muted"></i>
+              {{/if}}
+            </div>
+
+            <div class="panel-footer-item">
+              <button class="btn btn-default" data-event-action="showPackageSettings">
+                <i class="fa fa-gear"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
